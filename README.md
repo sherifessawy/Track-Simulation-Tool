@@ -43,3 +43,8 @@ The other approach which is provided through the Jupyter notebook file, is to ca
 3. Run all cells and the results will be saved to a csv file
 
 * Note that the jupyter notebook provided is the only version that is adjusted to extract the values from the excel sheet
+
+## Optional
+While giving in input to the excel sheet 2 things are optional:
+1. In case of simulating performance of car with wings, you can choose either to make the wings active or static. Static wings will keep Cd and Cl constant on any part of the track. However, the active wings option, will take extra inputs which is the minumum drag position values of Cd and Cl of the wing, and will be used only in straight roads to maximize car acceleration.
+2. You can choose whether or not to run the 4-DOF model which will require extra inputs if you want to run it.
