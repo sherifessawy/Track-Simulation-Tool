@@ -38,8 +38,8 @@ The code provided in this Repo solves each part of the track disregarding the so
 The other approach which is provided through the Jupyter notebook file, is to calculate the universal solution for the car accelerating from zero to maximum velocity, and decelerating from max velocity to zero. This solution is the used to update the solution throughout the track without actually having to calculate it again. For instance, if the car is braking from velocity = 50 km/hr to velocity = 20 km/hr, it will directly extract this part of the universal solution without having to calculate it again.
 
 ## A guide to use the code
-1. Download the excel file and add all the required inputs (some of the inputs are optional and all explained in the excel sheet)
-2. Use the Juypyter notebook provided to run the code and provide the path to the excel file in the second cell or upload it without changing its name.
+1. Download the excel file (Car specs) and add all the required inputs (some of the inputs are optional and all explained in the excel sheet)
+2. Use the Juypyter notebook provided (Track simulation) to run the code and provide the path to the excel file in the second cell or upload it without changing its name.
 3. Run all cells and the results will be saved to a csv file
 
 * Note that the jupyter notebook provided is the only version that is adjusted to extract the values from the excel sheet
