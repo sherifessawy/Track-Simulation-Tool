@@ -14,12 +14,15 @@ The car systems that are modeled, beside the track, and that will be asked as in
 3. Car different parameters (e.g, car sprung/unsprung masses, spring stiffness, etc.)
 
 The car is modeled as point mass during acceleration, and is modeled as 4-degrees of freedom, or "bicycle" model (shown in Figure 1) during braking. The reason for that is shown in Figure 2. The results showed difference in solution and unphysical behaviors of the point mass model during braking.
+
 ![20562638_10213236318492003_839197412_n](https://user-images.githubusercontent.com/27374894/34449280-58e2bd72-ecff-11e7-8a38-c0c2bafb8b99.png)
 
 **Figure 1. 4-degrees of freedom model** 
 ![h](https://user-images.githubusercontent.com/27374894/34449222-c4feb692-ecfe-11e7-86e5-0e2eb2d09f72.png)
 
 **Figure 2. Performance gap between point mass and 4 degrees of freedom model** 
+
+The point mass model exibits discontinuity in the deceleration rate due to that the equations of point mass model, unlike the 4-DOF model, don't take into consideration the time taken to reach the final position, it calculates only the final positions based on discrete inputs. So, this discontinuous manner hapens
 
 ## Code Formulation
 The code consists of 4 main functions:
@@ -38,3 +41,5 @@ The other approach which is provided through the Jupyter notebook file, is to ca
 1. Download the excel file and add all the required inputs (some of the inputs are optional and all explained in the excel sheet)
 2. Use the Juypyter notebook provided to run the code and provide the path to the excel file in the second cell or upload it without changing its name.
 3. Run all cells and the results will be saved to a csv file
+
+* Note that the jupyter notebook provided is the only version that is adjusted to extract the values from the excel sheet
