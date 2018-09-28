@@ -12,7 +12,7 @@ A comprmise between computational complexity and solution accuracy is done leadi
 
 ## code weaknesses
 1. The tire model used while making this code was a simple one that led to not realistic behaviours while braking. 
-   i. This behaviour was partially overcome by accounting for the transient response of the car while weight transfer is calculated, simulating the car as 4-degrees of freedom while braking.
+   1. This behaviour was partially overcome by accounting for the transient response of the car while weight transfer is calculated, simulating the car as 4-degrees of freedom while braking.
 2. The code simulates the car as a point mass while cornering, but it also maintains the maximum velocity of the car while cornering at acceptaple limits. So that it won't lead to not realistic results due to simple modeling (i.e. the speed of the car is controlled so that no skidding or rolling will occur while cornering)
 
 ## Systems modeling 
