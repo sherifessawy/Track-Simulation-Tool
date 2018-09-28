@@ -1,8 +1,8 @@
 # Track-Simulation-Tool
-The code provided is tested for many, but not all, cases simulating the performance of Formula Student race car with on different tracks. It was a part of a project done by [ASU Racing Team](http://asuracingteam.org/) participating in [FSUK](https://www.imeche.org/events/formula-student) '17. The code formulation will be briefly discussed, and a guide will be provided, if there's an interest to use the code for your own simulation.
+The code provided is tested for many, but not all, cases simulating the performance of Formula Student race car on different tracks. It was a part of a project done by [ASU Racing Team](http://asuracingteam.org/) participating in [FSUK](https://www.imeche.org/events/formula-student) '17. The code formulation will be briefly discussed, and a guide will be provided, if there's an interest to use the code for your own simulation.
 
 ## Scope
-The scope of this project was to test multiple designs for the aerodynamic kit, to be installed on ASURT Formula Student car, on Autocross track of the competition. the code was slightly improved, as will be explained later, to optmimize the brake design along with the installed aerodynamic kit.
+The scope of this project was to test multiple designs for the aerodynamic kit, to be installed on ASURT Formula Student car, on Autocross track of the competition. The code was slightly improved, as will be explained later, to optmimize the brake design along with the installed aerodynamic kit.
 
 ## Assumptions 
 A comprmise between computational complexity and solution accuracy is done leading to the following assumptions:
@@ -15,25 +15,24 @@ A comprmise between computational complexity and solution accuracy is done leadi
 2. The code simulates the car as a point mass while cornering, but it also makes sure that the max velocity of the car while cornering is acceptaple and won't lead to not realistic results (i.e. the speed of the car is controlled so that no skidding or rolling will occur while cornering)
 
 ## Systems modeling 
-The car systems that are modeled, beside the track, and that will be asked as input for the code are:
-1. Aerodynamic kit (e.g, Cd, Cl of the wings)
-2. Brake system (e.g, bias ratio, C.G location)
+The car systems that are modeled and that will be asked as inputs, besides the track, are:
+1. Aerodynamic kit (e.g, Cd, Cl of the wings) 
+**if no kit installed** its area is set to Zero
+2. Brake system (e.g, bias ratio, brake constant, C.G location)
 3. Car different parameters (e.g, car sprung/unsprung masses, spring stiffness, etc.)
 
-The car is modeled as point mass during acceleration, and is modeled as 4-degrees of freedom, or "bicycle" model (shown in Figure 1) during braking. The reason for that is shown in Figure 3. The results showed difference in solution and unphysical behaviors of the point mass model during braking.
+For simplicity, the car is modeled as point mass during acceleration. But it is modeled as 4-degrees of freedom, or "bicycle" model (shown in Figure 2) during braking. The reason for that will be explained in **performance gap** section.
 
-### point mass modeling:
+### point mass modeling during braking:
 Lateral or longitudinal weight transfer, is the amount of change on the vertical loads of the tyres due to the longitudinal acceleration imposed on the centre of gravity (CG) of the car. In other words, it is the amount Weight transfer by which vertical load is increased on the front tyres and reduced from the rear tyres when the car is decelerating.
  
-The total weight transfer on the car can be calculated from its free body diagram, as shown in figure 2. In the image, the car is looked from the rear in a right hand turn. Here,  is the lateral acceleration in G units,  is the weight of the car,  is the CG height,  is the track width and and  are the vertical loads on the left and right tyres, respectively.
+The total weight transfer on the car can be calculated from its free body diagram, as shown in figure 1. In the image, the car is looked from the rear in a right hand turn. Here,  is the lateral acceleration in G units,  is the weight of the car,  is the CG height,  is the track width and and  are the vertical loads on the left and right tyres, respectively. In a similar fashion, longitudinal weight transfer can be calculated.
 
 ![capture](https://user-images.githubusercontent.com/27374894/46210505-2ff1f500-c331-11e8-9503-81139d68f11f.PNG)
 
-**Figure 1. lateral weight transfer of a vehichle** 
+**Figure 1. lateral weight transfer of a vehichle**  
 
-**in case of** acceleration and cornering, weight transfer was not considered for simplicity, however it was only considered while braking for brake system optimization. 
-
-### 4-degrees of freedom modeling:
+### 4-degrees of freedom modeling during braking:
 
 ![20562638_10213236318492003_839197412_n](https://user-images.githubusercontent.com/27374894/46210573-5f086680-c331-11e8-9b81-287a8748ce62.png)
 
@@ -45,9 +44,17 @@ The total weight transfer on the car can be calculated from its free body diagra
 
 **Figure 3. Performance gap between point mass and 4 degrees of freedom model** 
 
-The point mass model exibits discontinuity in the deceleration rate due to that the equations of point mass model, unlike the 4-DOF model, don't take into consideration the time taken to reach the final position, it calculates only the final positions based on discrete inputs. So, this discontinuous manner hapens.
+The point mass model exibits discontinuity in the deceleration rate as seen in Figure 3 due to simplistic tire model and due to that the equations of point mass model, unlike the 4-DOF model, don't take into consideration the time taken to reach the final position. It calculates only the final positions based on discrete inputs (as seen in equations in Figure 1). 
 
-**The not realistic behavoiur was due to simple tire model:** while braking was that there was a discontinous changes in deceleration rate as the output and the inputs for the equations in Figure 1 was dependent. Since the equations in figure 1 did not take into consideration the time taken by the car to reach the final steady state condition after the weigh transfer is done, they were replaced by equations in Figure 2 to account for the transient response for the car to reach the final condition and this partially solved the issue  as seen in Figure 3 
+**The not realistic behavoiur was due to simple tire model:** while braking there was a discontinous changes in deceleration rate as the output and the inputs for the equations in Figure 1 was dependent. as shown in Figure 4, Decelration affects the weight transfer that affects the wheel loads that affects the tyres skid ratio which in turns affects the deceleration. And since the tyre model used here has one of two values (the car tyre is either skidding or not) this not realistic behaviour appeared.
+
+![image](https://user-images.githubusercontent.com/27374894/46214873-51a4a980-c33c-11e8-9ff7-034fb65143d0.png)
+
+**Figure 4, dependent variables**
+
+Since the equations in figure 1 did not take into consideration the time taken by the car to reach the final steady state condition after the weigh transfer is done, and to overcome this behaviour, 4 more equations were added to account for the transient response of the car to reach the final condition, This partially solved the issue  as seen in Figure 3.
+
+**This behaviour should be overcome completly when the tyre model used is one that resembles the real case and not a simplistic one**
 
 ## Code Formulation
 The code consists of 4 main functions:
