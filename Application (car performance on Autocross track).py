@@ -1,6 +1,9 @@
 """
-Below is an application to test the performance of the winged car vs non winged car with given specs on given Autocross track of Formula 
-Student competition. The Run on an ordinary computer might take up to 5 mins, for both smulations to be conplete.
+Below is an application to test the performance of the winged car vs non winged car with given specs on Autocross track of Formula 
+Student competition. The Run on an ordinary computer might take up to 5 mins, for both smulations to be complete. 
+UNLIKE the version provided through the .ipynp file version, this version is slower as it doesn't generate a brake charactaristic curve 
+during the solution. UNLIKE .ipynb file version this version also doesn't calculate the perfect shifting rpm between different gears, 
+and the shifting rpm is set to 12000 rpm @ max power.
 """
 
 import numpy as np
@@ -65,10 +68,10 @@ Cd_aerofoil_f = 1.0 #cd front wing
 One is the max down force position (in corners), and the other is the min drag position (in straight roads). 
 However, the kit in this application is static so both have the same value"""
 
-Cd_aerofoil_s_S = 1.109 #cd rear wing during straight roads
-Cl_aerofoil_s_S = 5.7059 #cl rear wing during straight roads
-Cl_aerofoil_c_S = 5.7059 #cl rear wing during corners
-Cd_aerofoil_c_S = 1.1 #cd rear wing during corner
+Cd_aerofoil_s_S = 1.109 #cd rear wing during straight roads (will change in case of active wings)
+Cl_aerofoil_s_S = 5.7059 #cl rear wing during straight roads (will change in case of active wings)
+Cl_aerofoil_c_S = 5.7059 #cl rear wing during corners 
+Cd_aerofoil_c_S = 1.1 #cd rear wing during corner 
 
 row = 1.2 #density
 
