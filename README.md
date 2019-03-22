@@ -1,6 +1,8 @@
 # Track-Simulation-Tool
 The code provided is tested for limited cases simulating the performance of Formula Student race car on different tracks. It was a part of a project done by [ASU Racing Team](http://asuracingteam.org/) participating in [FSUK](https://www.imeche.org/events/formula-student) competition. The code formulation will be briefly discussed, and a guide will be provided, if there's an interest to use the code for your own simulation.
 
+This [paper](https://www.sae.org/publications/technical-papers/content/2019-01-1128/), presented at WCX SAE World Congress Experience, explains the code formulation, car modeling on track and analysis done using the code.
+
 ## Scope
 The scope of this project was to test multiple designs for the aerodynamic kit, to be installed on ASURT Formula Student car, on Autocross track of the competition. The code was slightly improved, as will be explained later, to optimize the brake design along with the installed aerodynamic kit.
 
